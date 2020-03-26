@@ -32,39 +32,43 @@ Run the app in the development mode by opening [http://localhost:3333](http://lo
 
 ## Main Tecnologies Used
 
-<!-- #### Axios
+<!-- #### axios
 
 > To make queries on external API's. -->
 
-<!-- #### Cors
+#### bcryptjs
+
+> To generate encrypted passwords.
+
+<!-- #### cors
 
 > To allow the backend application to be accessed from any address (in this case, to be accessed by the frontend). -->
 
-<!-- #### Dotenv
+<!-- #### dotenv
 
 > To load environment variables form the `.env` file. -->
 
-#### Express
+#### express
 
 > To better handle application routes.
 
-<!-- #### MongoDB
+<!-- #### mongodb
 
 > To write application data. -->
 
-<!-- #### Mongoose
+<!-- #### mongoose
 
 > To facilitate communication with the database using javascript syntax -->
 
-#### Nodemon
+#### nodemon
 
 > To run my application more conveniently.
 
-#### Sequelize
+#### sequelize
 
 > To better manage communication with my databases.
 
-<!-- #### Socket.io
+<!-- #### socket.io
 
 > To communicate backend with the frontend in real-time. -->
 
