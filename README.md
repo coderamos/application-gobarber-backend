@@ -52,6 +52,10 @@ Run the app in the development mode by opening [http://localhost:3333](http://lo
 
 > To better handle application routes.
 
+#### jsonwebtoken
+
+> To generate JWT token.
+
 <!-- #### mongodb
 
 > To write application data. -->
