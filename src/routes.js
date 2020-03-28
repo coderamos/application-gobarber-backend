@@ -6,6 +6,9 @@ import { authMiddleware } from './app/middlewares';
 
 const routes = new Router();
 
+// get all users
+routes.get('/users', UserController.index);
+
 // create new user
 routes.post('/users', UserController.store);
 
