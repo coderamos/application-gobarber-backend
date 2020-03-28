@@ -76,6 +76,10 @@ Run the app in the development mode by opening [http://localhost:3333](http://lo
 
 > To communicate backend with the frontend in real-time. -->
 
+#### yup
+
+> To validate the data in the request body
+
 ## About Me
 
 My Github profile: https://github.com/coderamos/
