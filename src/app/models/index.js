@@ -1,3 +1,4 @@
-import UserModel from './user/User';
+import FileModel from './file/FileModel';
+import UserModel from './user/UserModel';
 
-export { UserModel };
+export { FileModel, UserModel };

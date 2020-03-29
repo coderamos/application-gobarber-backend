@@ -1,5 +1,5 @@
-import authConfig from './auth/auth';
-import databaseConfig from './database/database';
-import multerConfig from './multer/multer';
+import authConfig from './auth/authConfig';
+import databaseConfig from './database/databaseConfig';
+import multerConfig from './multer/multerConfig';
 
 export { authConfig, databaseConfig, multerConfig };
