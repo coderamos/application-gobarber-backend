@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
 
-import { authConfig } from '../../config';
-import User from '../models/User';
+import { authConfig } from '../../../config';
+import { UserModel } from '../../models';
 
 class SessionController {
   async store(request, response) {
@@ -18,7 +18,7 @@ class SessionController {
     }
 
     const { email, password } = request.body;
-    const user = await User.findOne({ where: { email } });
+    const user = await UserModel.findOne({ where: { email } });
 
     if (!user) {
       return response.status(401).json({ error: 'USER NOT FOUND!' });

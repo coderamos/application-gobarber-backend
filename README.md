@@ -64,6 +64,10 @@ Run the app in the development mode by opening [http://localhost:3333](http://lo
 
 > To facilitate communication with the database using javascript syntax -->
 
+#### multer
+
+> To handle Multipart Form Data and automate the process of uploading files within the backend.
+
 #### nodemon
 
 > To run my application more conveniently.

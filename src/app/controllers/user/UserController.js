@@ -1,10 +1,10 @@
 import * as Yup from 'yup';
 
-import User from '../models/User';
+import { UserModel } from '../../models';
 
 class UserController {
   async index(request, response) {
-    const users = await User.findAll();
+    const users = await UserModel.findAll();
     return response.json({ users });
   }
 
@@ -23,7 +23,7 @@ class UserController {
       return response.status(400).json({ error: 'VALIDATION FAILS.' });
     }
 
-    const userExists = await User.findOne({
+    const userExists = await UserModel.findOne({
       where: { email: request.body.email },
     });
 
@@ -31,7 +31,7 @@ class UserController {
       return response.status(400).json({ error: 'USER ALREADY EXISTS.' });
     }
 
-    const { id, name, email, provider } = await User.create(request.body);
+    const { id, name, email, provider } = await UserModel.create(request.body);
 
     return response.json({
       id,
@@ -61,9 +61,9 @@ class UserController {
     }
 
     const { email, oldPassword } = request.body;
-    const user = await User.findByPk(request.userId);
+    const user = await UserModel.findByPk(request.userId);
     if (email && email !== user.email) {
-      const userExists = await User.findOne({
+      const userExists = await UserModel.findOne({
         where: { email },
       });
 

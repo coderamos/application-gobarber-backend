@@ -1,24 +1,22 @@
 import { Router } from 'express';
+import multer from 'multer';
 
-import SessionController from './app/controllers/SessionController';
-import UserController from './app/controllers/UserController';
+import { SessionController, UserController } from './app/controllers';
 import { authMiddleware } from './app/middlewares';
+import { multerConfig } from './config';
 
+const upload = multer(multerConfig);
 const routes = new Router();
 
-// get all users
 routes.get('/users', UserController.index);
-
-// create new user
 routes.post('/users', UserController.store);
 
-// create new session
 routes.post('/sessions', SessionController.store);
 
-// GLOBAL MIDDLEWARE: all routes below verify that the user is authenticated
 routes.use(authMiddleware);
-
-// update user
 routes.put('/users', UserController.update);
+routes.post('/files', upload.single('file'), (request, response) => {
+  return response.json({ ok: true });
+});
 
 export default routes;
