@@ -5,7 +5,7 @@ import { UserModel } from '../../models';
 class UserController {
   async index(request, response) {
     const users = await UserModel.findAll();
-    return response.json({ users });
+    return response.json(users);
   }
 
   async store(request, response) {
