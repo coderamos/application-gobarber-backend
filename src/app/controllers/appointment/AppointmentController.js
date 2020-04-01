@@ -8,6 +8,7 @@ import { NotificationSchema } from '../../schemas';
 class AppointmentController {
   async index(request, response) {
     const { page = 1 } = request.query;
+
     const appointments = await AppointmentModel.findAll({
       where: { user_id: request.userId, canceled_at: null },
       order: ['date'],
@@ -45,14 +46,21 @@ class AppointmentController {
     const { provider_id, date } = request.body;
 
     // check if 'provider_id' is a provider
-    const isProvider = await UserModel.findOne({
+    const checkIsProvider = await UserModel.findOne({
       where: { id: provider_id, provider: true },
     });
 
-    if (!isProvider) {
+    if (!checkIsProvider) {
       return response
         .status(401)
         .json({ error: 'THIS IS NOT A VALID PROVIDER ID.' });
+    }
+
+    // check if 'user_id' is a provider
+    if (provider_id === request.userId) {
+      return response
+        .status(401)
+        .json({ error: 'SELF-SCHEDULING NOT ALLOWED.' });
     }
 
     // check for past dates
