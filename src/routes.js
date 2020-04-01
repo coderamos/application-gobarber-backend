@@ -5,6 +5,7 @@ import {
   AppointmentController,
   FileController,
   ProviderController,
+  ScheduleController,
   SessionController,
   UserController,
 } from './app/controllers';
@@ -22,11 +23,13 @@ routes.post('/sessions', SessionController.store);
 routes.use(authMiddleware);
 routes.put('/users', UserController.update);
 
-routes.post('/files', upload.single('file'), FileController.store);
-
 routes.get('/providers', ProviderController.index);
 
 routes.get('/appointments', AppointmentController.index);
 routes.post('/appointments', AppointmentController.store);
+
+routes.get('/schedule', ScheduleController.index);
+
+routes.post('/files', upload.single('file'), FileController.store);
 
 export default routes;
