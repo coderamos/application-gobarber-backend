@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import Sequelize from 'sequelize';
 
 import { AppointmentModel, FileModel, UserModel } from '../app/models';
@@ -8,6 +9,7 @@ const models = [UserModel, FileModel, AppointmentModel];
 class Database {
   constructor() {
     this.init();
+    this.mongo();
   }
 
   init() {
@@ -15,6 +17,13 @@ class Database {
     models
       .map(model => model.init(this.connection))
       .map(model => model.associate && model.associate(this.connection.models));
+  }
+
+  mongo() {
+    this.mongoConnection = mongoose.connect(
+      `mongodb://localhost:27017/bootcamp-rocketseat-gobarber-backend`,
+      { useNewUrlParser: true, useUnifiedTopology: true }
+    );
   }
 }
 
