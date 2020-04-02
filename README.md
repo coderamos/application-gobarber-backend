@@ -68,6 +68,10 @@ Run the app in the development mode by opening [http://localhost:3333](http://lo
 
 > To handle Multipart Form Data and automate the process of uploading files within the backend.
 
+#### nodemailer
+
+> To send emails easily.
+
 #### nodemon
 
 > To run my application more conveniently.

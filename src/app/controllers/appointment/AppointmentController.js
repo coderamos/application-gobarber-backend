@@ -2,6 +2,7 @@ import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import * as Yup from 'yup';
 
+import { MailLib } from '../../../lib';
 import { UserModel, AppointmentModel, FileModel } from '../../models';
 import { NotificationSchema } from '../../schemas';
 
@@ -106,7 +107,20 @@ class AppointmentController {
   }
 
   async delete(request, response) {
-    const appointment = await AppointmentModel.findByPk(request.params.id);
+    const appointment = await AppointmentModel.findByPk(request.params.id, {
+      include: [
+        {
+          model: UserModel,
+          as: 'provider',
+          attributes: ['name', 'email'],
+        },
+        {
+          model: UserModel,
+          as: 'user',
+          attributes: ['name'],
+        },
+      ],
+    });
     if (appointment.user_id !== request.userId) {
       return response.status(401).json({
         error: "YOU DON'T HAVE PERMISSION TO CANCEL THIS APPOINTMENT. ",
@@ -121,6 +135,18 @@ class AppointmentController {
     }
     appointment.canceled_at = new Date();
     await appointment.save();
+    await MailLib.sendMail({
+      to: `${appointment.provider.name} <${appointment.provider.email}>`,
+      subject: 'APPOINTMENT: CANCELED',
+      template: 'cancellation',
+      context: {
+        provider: appointment.provider.name,
+        user: appointment.user.name,
+        date: format(appointment.date, "dd 'de' MMMM', às' H:mm'h'", {
+          locale: pt,
+        }),
+      },
+    });
     return response.json(appointment);
   }
 }
