@@ -1,4 +1,4 @@
-import { startOfHour, parseISO, isBefore, format } from 'date-fns';
+import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import * as Yup from 'yup';
 
@@ -102,6 +102,25 @@ class AppointmentController {
       user: provider_id,
     });
 
+    return response.json(appointment);
+  }
+
+  async delete(request, response) {
+    const appointment = await AppointmentModel.findByPk(request.params.id);
+    if (appointment.user_id !== request.userId) {
+      return response.status(401).json({
+        error: "YOU DON'T HAVE PERMISSION TO CANCEL THIS APPOINTMENT. ",
+      });
+    }
+
+    const toleranceDate = subHours(appointment.date, 2);
+    if (isBefore(toleranceDate, new Date())) {
+      return response
+        .status(401)
+        .json({ error: 'TOLERANCE TIME EXCEEDED (TWO HOURS).' });
+    }
+    appointment.canceled_at = new Date();
+    await appointment.save();
     return response.json(appointment);
   }
 }
