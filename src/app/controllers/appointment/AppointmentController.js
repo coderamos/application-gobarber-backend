@@ -2,7 +2,8 @@ import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import * as Yup from 'yup';
 
-import { MailLib } from '../../../lib';
+import { QueueLib } from '../../../lib';
+import { CancellationMailJob } from '../../jobs';
 import { UserModel, AppointmentModel, FileModel } from '../../models';
 import { NotificationSchema } from '../../schemas';
 
@@ -135,18 +136,8 @@ class AppointmentController {
     }
     appointment.canceled_at = new Date();
     await appointment.save();
-    await MailLib.sendMail({
-      to: `${appointment.provider.name} <${appointment.provider.email}>`,
-      subject: 'APPOINTMENT: CANCELED',
-      template: 'cancellation',
-      context: {
-        provider: appointment.provider.name,
-        user: appointment.user.name,
-        date: format(appointment.date, "dd 'de' MMMM', às' H:mm'h'", {
-          locale: pt,
-        }),
-      },
-    });
+    await QueueLib.add(CancellationMailJob.key, { appointment });
+
     return response.json(appointment);
   }
 }
