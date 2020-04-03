@@ -1,8 +1,8 @@
 {
-  "name": "bootcamp-rocketseat-gobarber-backend",
+  "name": "codefolio-gobarber-backend",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/coderamos/bootcamp-rocketseat-gobarber-backend.git",
+  "repository": "https://github.com/coderamos/codefolio-gobarber-backend.git",
   "author": "Diego Ramos <diego.coderamos@gmail.com>",
   "license": "MIT",
   "scripts": {

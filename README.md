@@ -1,10 +1,10 @@
-# bootcamp | ROCKETSEAT-GOBARBER-BACKEND
+# codefolio | GOBARBER-BACKEND
 
 ## About This Project
 
-This project contains the entire backend of the **[bootcamp-rocketseat-gobarber-backend](https://github.com/coderamos/bootcamp-rocketseat-gobarber-backend)**.
+This project contains the entire backend of the **[codefolio-gobarber-backend](https://github.com/coderamos/codefolio-gobarber-backend)**.
 
-The **bootcamp-rocketseat-gobarber-backend** project was create with [NodeJS](https://nodejs.org/en/) You can learn more in the [NodeJS Documentation](https://nodejs.org/en/docs/).
+The **codefolio-gobarber-backend** project was create with [NodeJS](https://nodejs.org/en/) You can learn more in the [NodeJS Documentation](https://nodejs.org/en/docs/).
 
 ## Prerequisites
 
