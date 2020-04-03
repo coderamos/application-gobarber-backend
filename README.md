@@ -40,10 +40,6 @@ Run the app in the development mode by opening [http://localhost:3333](http://lo
 
 > To manage background jobs (email queues) in my application.
 
-<!-- #### cors
-
-> To allow the backend application to be accessed from any address (in this case, to be accessed by the frontend). -->
-
 #### dotenv
 
 > To load environment variables form the `.env` file.
@@ -58,11 +54,11 @@ Run the app in the development mode by opening [http://localhost:3333](http://lo
 
 #### mongodb
 
-> To save notification data
+> To save notification data.
 
 #### mongoose
 
-> To facilitate communication with the database using javascript syntax
+> To facilitate communication with the database using javascript syntax.
 
 #### multer
 
@@ -80,17 +76,17 @@ Run the app in the development mode by opening [http://localhost:3333](http://lo
 
 > To save email records more efficiently.
 
+#### sentry
+
+> To monitor application errors.
+
 #### sequelize
 
 > To better manage communication with my databases.
 
-<!-- #### socket.io
-
-> To communicate backend with the frontend in real-time. -->
-
 #### yup
 
-> To validate the data in the request body
+> To validate the data in the request body.
 
 ## About Me
 
