@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-import { UserModel } from '../../models';
+import { UserModel, FileModel } from '../../models';
 
 class UserController {
   async index(request, response) {
@@ -76,13 +76,23 @@ class UserController {
       return response.status(401).json({ error: 'PASSWORD DOES NOT MATCH.' });
     }
 
-    const { id, name, provider } = await user.update(request.body);
+    await user.update(request.body);
+
+    const { id, name, avatar } = await UserModel.findByPk(request.userId, {
+      include: [
+        {
+          model: FileModel,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
 
     return response.json({
       id,
       name,
       email,
-      provider,
+      avatar,
     });
   }
 }

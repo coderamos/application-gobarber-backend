@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
 
 import { authConfig } from '../../../config';
-import { UserModel } from '../../models';
+import { UserModel, FileModel } from '../../models';
 
 class SessionController {
   async store(request, response) {
@@ -18,7 +18,16 @@ class SessionController {
     }
 
     const { email, password } = request.body;
-    const user = await UserModel.findOne({ where: { email } });
+    const user = await UserModel.findOne({
+      where: { email },
+      include: [
+        {
+          model: FileModel,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
 
     if (!user) {
       return response.status(401).json({ error: 'USER NOT FOUND!' });
@@ -28,13 +37,15 @@ class SessionController {
       return response.status(401).json({ error: 'PASSWORD INVALID!' });
     }
 
-    const { id, name } = user;
+    const { id, name, avatar, provider } = user;
 
     return response.json({
       user: {
         id,
         name,
         email,
+        provider,
+        avatar,
       },
       token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,

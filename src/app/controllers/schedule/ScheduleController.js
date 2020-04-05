@@ -12,7 +12,6 @@ class ScheduleController {
       return response.status(401).json({ error: 'USER IS NOT A PROVIDER.' });
     }
 
-    // 2020-04-02T00:00:00-03:00
     const { date } = request.query;
     const parsedDate = parseISO(date);
 
@@ -24,6 +23,13 @@ class ScheduleController {
           [Op.between]: [startOfDay(parsedDate), endOfDay(parsedDate)],
         },
       },
+      include: [
+        {
+          model: UserModel,
+          as: 'user',
+          attributes: ['name'],
+        },
+      ],
       order: ['date'],
     });
 
